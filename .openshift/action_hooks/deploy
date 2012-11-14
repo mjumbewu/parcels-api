@@ -3,3 +3,25 @@
 # build hook has been run but before the application has been started back
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
+
+cartridge_type="python-2.6"
+source $OPENSHIFT_HOMEDIR/$cartridge_type/virtenv/bin/activate
+
+echo "Injecting database settings into local_settings.py"
+cat >> $OPENSHIFT_REPO_DIR/src/project/local_settings.py <<EOF
+import os
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'os.environ['OPENSHIFT_APP_NAME'],
+        'USER': os.environ['OPENSHIFT_POSTGRESQL_DB_USERNAME'],
+        'PASSWORD': os.environ['OPENSHIFT_POSTGRESQL_DB_PASSWORD'],
+        'HOST': os.environ['OPENSHIFT_POSTGRESQL_DB_HOST'],
+        'PORT': os.environ['OPENSHIFT_POSTGRESQL_DB_PORT'],
+    }
+}
+EOF
+
+echo "Syncing the database models"
+$OPENSHIFT_REPO_DIR/src/manage.py syncdb
