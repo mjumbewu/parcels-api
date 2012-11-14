@@ -28,10 +28,10 @@ class ParcelFileLoader:
 #    shp = os.path.abspath(os.path.join(os.path.dirname(__file__), rel_shp))
     
     def get_field_mapping(self, layer):
-        self.mapping = {
-            field.lower(): field
+        self.mapping = dict([
+            (field.lower(), field)
             for field in layer.fields
-        }
+        ])
         return self.mapping
 
     def get_data_source(self, sourcename):
