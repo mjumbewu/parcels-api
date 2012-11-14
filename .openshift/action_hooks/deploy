@@ -17,7 +17,7 @@ import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'os.environ['OPENSHIFT_APP_NAME'],
+        'NAME': os.environ['OPENSHIFT_APP_NAME'],
         'USER': os.environ['OPENSHIFT_POSTGRESQL_DB_USERNAME'],
         'PASSWORD': os.environ['OPENSHIFT_POSTGRESQL_DB_PASSWORD'],
         'HOST': os.environ['OPENSHIFT_POSTGRESQL_DB_HOST'],
