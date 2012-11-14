@@ -1,0 +1,14 @@
+# Server
+Django==1.4.2
+
+# Database Management
+psycopg2==2.4.5
+
+# API Tools
+djangorestframework==2.1.2
+Markdown==2.2.1
+django-filter==0.5.3
+
+# Debugging
+django-debug-toolbar==0.9.4
+
