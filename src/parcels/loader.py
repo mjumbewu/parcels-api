@@ -57,7 +57,7 @@ class ParcelFileLoader:
             bytesread = 0
             print '  0.0% Complete',
             while shpfile:
-                data = shpfile.read(4096)
+                data = shpfile.read(1024)
                 outfile.write(data)
                 bytesread += len(data)
                 print '\r  %.1f%% Complete' % (bytesread * 100 / totalbytes),
