@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Here we assume that you're using your default database with the name of 
+# your application.
+OPENSHIFT_DB_NAME = $OPENSHIFT_APP_NAME
+
+psql $OPENSHIFT_DB_NAME -c "create language plpgsql;"
+psql -d $OPENSHIFT_DB_NAME -f /usr/share/pgsql/contrib/postgis-64.sql
+psql -d $OPENSHIFT_DB_NAME -f /usr/share/pgsql/contrib/spatial_ref_sys.sql
+
