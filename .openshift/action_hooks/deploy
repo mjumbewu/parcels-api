@@ -14,6 +14,7 @@ echo "Injecting database settings into local_settings.py"
 cat >> $OPENSHIFT_REPO_DIR/src/project/local_settings.py <<EOF
 import os
 
+DEBUG = (os.environ.get('DEBUG', False) == 'True')
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
