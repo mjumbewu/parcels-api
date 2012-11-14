@@ -86,10 +86,10 @@ class ParcelFileLoader:
             total += 1
             self.count += 1
 
-            parcel_args = {
-                field: feature[orig_field].value
+            parcel_args = dict([
+                (field, feature[orig_field].value)
                 for field, orig_field in mapping_items
-            }
+            ])
             
             try:
                 parcel_args['shape'] = feature.geom.transform(4326, clone=True).wkt
