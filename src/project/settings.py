@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     
     'parcels',
+    'opa',
 )
 
 REST_FRAMEWORK = {

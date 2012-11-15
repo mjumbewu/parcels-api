@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^parcels/$', 'parcels.views.parcel_list', name='parcel_list'),
+    url(r'^opa/(.*)$', 'opa.views.opa_proxy', name='opa_api'),
 )
