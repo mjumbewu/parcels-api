@@ -4,7 +4,7 @@
 # before the deploy step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
-OPENSHIFT_RUNTIME_DIR=${OPENSHIFT_HOMEDIR}app-root/runtime
+OPENSHIFT_RUNTIME_DIR=${OPENSHIFT_HOMEDIR}app-root/runtime/
 
 GEOS_LIBRARY_PATH=${OPENSHIFT_RUNTIME_DIR}lib/libgeos_c.so
 GDAL_LIBRARY_PATH=${OPENSHIFT_RUNTIME_DIR}lib/libgdal.so
