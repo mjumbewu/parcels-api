@@ -30,6 +30,7 @@ should only have to install them once.
 
 Now, once the deploy has finished, log in to the server and run the following:
 
+    . python-2.6/virtenv/bin/activate
     cd $OPENSHIFT_REPO_DIR
     src/manage.py loadparcels <shapefile-URL> <path-to-shape-data>
 
@@ -40,3 +41,13 @@ Philadelphia parcel shape file from the Pennsylvania Spacial Data Access
 site.  If you want to use other data, run ``src/manage.py help loadparcels`` 
 to see more information on your options.
 
+**NOTE: ** It may take a long time to load the parcels.  If you don't want to
+sit and watch them load, you can run the loader headless like so::
+
+    nohup src/manage.py loadparcels <...> &
+    
+If you then want to see the progress of the loading, use the following 
+command::
+
+    tail -f nohup.out
+    
