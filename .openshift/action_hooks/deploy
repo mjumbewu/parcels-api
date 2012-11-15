@@ -27,6 +27,11 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', 'static')
+
+OPENSHIFT_RUNTIME_DIR = os.environ['VIRTUAL_ENV']
+GEOS_LIBRARY_PATH = OPENSHIFT_RUNTIME_DIR + 'lib/libgeos_c.so'
+GDAL_LIBRARY_PATH = OPENSHIFT_RUNTIME_DIR + 'lib/libgdal.so'
+
 EOF
 
 echo "Syncing the database models"
