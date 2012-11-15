@@ -62,9 +62,12 @@ class ParcelFileLoader:
     
     def load_from_zipfile(self, shpfilename, shpdatafilename):
         tmpdir = tempfile.mkdtemp()
-        with zipfile.ZipFile(shpfilename) as shpfile:
+        shpfile = zipfile.ZipFile(shpfilename)
+        try:
             print 'Extracting the shapefile to ' + tmpdir
             shpfile.extractall(tmpdir)
+        finally:
+            shpfile.close()
         self.load_data(os.path.join(tmpdir, shpdatafilename))
         
     def load_data(self, shpdatafilename):
