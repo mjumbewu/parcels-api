@@ -70,7 +70,9 @@ class ParcelList (generics.ListAPIView):
     """
     model = models.Parcel
     serializer_class = serializers.ParcelSerializer
-    renderer_classes = (renderers.JSONRenderer, renderers.JSONPRenderer)
+    renderer_classes = (renderers.JSONRenderer, 
+                        renderers.JSONPRenderer, 
+                        renderers.BrowsableAPIRenderer)
     paginate_by = 20
     
     def apply_near_filter(self, queryset):
