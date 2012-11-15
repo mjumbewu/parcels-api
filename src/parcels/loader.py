@@ -1,31 +1,24 @@
 from __future__ import division
 
-# From within a manage.py shell, run::
-#
-#   from parcels.loader import ParcelFileLoader
-#   loader = ParcelFileLoader()
-#   loader.load_data()
-
+import logging
 import os
 import tempfile
 import zipfile
+
 from django.contrib.gis.gdal import DataSource
 from django.contrib.gis.gdal.error import OGRException
 from urllib2 import urlopen
-import logging
+
 from models import Parcel
 
 logger = logging.getLogger(__name__)
 logger.setLevel('DEBUG')
 
+
 class ParcelFileLoader:
     """
     Load a parcel shapefile into the database.
     """
-    
-    # url = 'http://www.pasda.psu.edu/philacity/data/PhiladelphiaParcels201201.zip'
-#    rel_shp = '../../data/Philadelphia Parcels/PhiladelphiaParcels201201.shp'
-#    shp = os.path.abspath(os.path.join(os.path.dirname(__file__), rel_shp))
     
     def get_field_mapping(self, layer):
         self.mapping = dict([
@@ -82,8 +75,15 @@ class ParcelFileLoader:
         self.count = 0
         total = 0
         
+        num_to_skip = Parcel.objects.count()
         for feature in layer:
             total += 1
+            
+            # Skip however many parcels are already in the database.
+            if num_to_skip > 0:
+                num_to_skip -= 1
+                continue
+            
             self.count += 1
 
             parcel_args = dict([
@@ -106,6 +106,9 @@ class ParcelFileLoader:
             if self.count >= 25000:
                 print('Flushing...')
                 self.flush_loaded_parcels()
+        
+        print('Flushing...')
+        self.flush_loaded_parcels()
     
     def flush_loaded_parcels(self):
         Parcel.objects.bulk_create(self.parcels)
