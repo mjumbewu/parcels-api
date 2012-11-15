@@ -29,7 +29,7 @@ Your first push will take a long time, because it runs the
 GEOS, and GDAL.  These take foooorreeeevverrrrr.  However, the build script
 should only have to install them once.
 
-Now, once the deploy has finished, log in to the server and run the following:
+Now, once the deploy has finished, log in to the server and run the following::
 
     . python-2.6/virtenv/bin/activate
     cd $OPENSHIFT_REPO_DIR
