@@ -1,7 +1,8 @@
 Parcels API
 ===========
 
-An API for exploring parcel data in Philadelphia.
+An API for exploring parcel data in Philadelphia.  See in instance live at
+http://phillyparcels-mjumbewu.rhcloud.com/parcels/
 
 Steps to setup on OpenShift
 ===========================
