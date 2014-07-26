@@ -32,9 +32,14 @@ class Parcel (models.Model):
     geoid      = models.CharField(max_length=25, null=True)
     shape_area = models.FloatField(null=True)
     shape_len  = models.FloatField(null=True)
-    
+
     shape = models.GeometryField(help_text="Coordinates defining the features.", null=True)
     objects = models.GeoManager()
-    
+
     def __unicode__(self):
-        return '{0} {1}'.format(self.house or '', self.stnam or '')
+        components = []
+        if self.house: components.append(unicode(self.house))
+        if self.stdir: components.append(unicode(self.stdir))
+        if self.stnam: components.append(unicode(self.stnam))
+        if self.stdes: components.append(unicode(self.stdes))
+        return u' '.join(components)
